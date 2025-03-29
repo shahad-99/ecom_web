@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your E-Commerce Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="site-header">
+        <div class="container header-content">
+            <!-- Header Left (Logo, Mobile Toggle) -->
+            <div class="header-left">
+                 <button class="mobile-toggle mobile-menu-toggle-btn" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="utility-nav-mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <a href="/"><h1>YourStore</h1></a>
+                </div>
+            </div>
+
+            <!-- Header Center (Search) -->
+            <div class="search-container">
+                <input type="search" id="search-bar" placeholder="Search products..." aria-label="Search products">
+                <button aria-label="Search" class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+
+            <!-- Right Side: Desktop Nav & Cart -->
+            <div class="header-right">
+                 <!-- Cart Icon -->
+                 <a href="#" class="utility-icon utility-cart-icon" id="cart-toggle" aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span> <!-- Updated by JS -->
+                </a>
+                <!-- Desktop Utility Nav -->
+                <nav class="utility-nav utility-nav-desktop">
+                    <!-- Account Icon triggers auth modal -->
+                    <button type="button" class="utility-icon auth-trigger" id="account-toggle-desktop" aria-label="Login or Sign Up">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <a href="#" class="utility-icon" aria-label="Wishlist"><i class="fas fa-heart"></i></a>
+                </nav>
+            </div>
+
+             <!-- Mobile Utility Nav (Slide-in) -->
+             <nav class="utility-nav utility-nav-mobile" id="utility-nav-mobile" aria-hidden="true">
+                 <button class="close-nav-btn" aria-label="Close Menu"><i class="fas fa-times"></i></button>
+                 <!-- Account/Signup links trigger auth modal -->
+                 <button type="button" class="auth-trigger mobile-nav-link" id="account-toggle-mobile" aria-label="Login">
+                     <i class="fas fa-user"></i> My Account / Login
+                 </button>
+                 <button type="button" class="auth-trigger mobile-nav-link" id="signup-toggle-mobile" data-show="signup" aria-label="Sign Up">
+                     <i class="fas fa-user-plus"></i> Sign Up
+                 </button>
+                 <a href="#" class="mobile-nav-link" aria-label="Wishlist"><i class="fas fa-heart"></i> Wishlist</a>
+             </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Controls Bar -->
+    <div class="mobile-controls-bar container" id="mobile-controls-bar">
+        <button class="mobile-toggle mobile-filter-toggle-btn" id="mobile-filter-toggle" aria-label="Toggle Filters" aria-expanded="false" aria-controls="filters-sidebar">
+             <i class="fas fa-filter"></i> Filters
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content container">
+        <!-- Filters Sidebar -->
+        <aside class="filters" id="filters-sidebar" aria-hidden="true">
+            <div class="filters-header">
+                <h2>Filters</h2>
+                <button class="close-filters-btn" aria-label="Close Filters"><i class="fas fa-times"></i></button>
+           </div>
+           <div class="filter-actions">
+                <!-- Disable clear button initially, enabled by JS when data loads -->
+                <button class="clear-filters-btn" id="clear-filters-btn" type="button" disabled>Clear All Filters</button>
+           </div>
+            <!-- Filter groups -->
+            <div class="filter-group">
+                <h3>Category</h3>
+                <ul id="category-filter-list">
+                    <li><span class="category-filter-item active" data-category="">All Categories</span></li>
+                    <li><span class="category-filter-item" data-category="electronics">Electronics</span></li>
+                    <li><span class="category-filter-item" data-category="clothing">Clothing</span></li>
+                    <li><span class="category-filter-item" data-category="home goods">Home Goods</span></li>
+                    <li><span class="category-filter-item" data-category="sports">Sports</span></li>
+                </ul>
+            </div>
+            <div class="filter-group">
+                <h3>Price Range</h3>
+                <label for="min-price">Min: $<span id="min-price-value">0</span></label>
+                <input type="range" id="min-price" name="min-price" min="0" max="1200" value="0" step="10">
+                <label for="max-price">Max: $<span id="max-price-value">1200</span></label>
+                <input type="range" id="max-price" name="max-price" min="0" max="1200" value="1200" step="10">
+            </div>
+            <div class="filter-group">
+                <h3>Brand</h3>
+                <ul id="brand-filter-list">
+                   <li><input type="checkbox" id="brandA" name="brand" value="Brand A"><label for="brandA"> Brand A</label></li>
+                   <li><input type="checkbox" id="brandB" name="brand" value="Brand B"><label for="brandB"> Brand B</label></li>
+                   <li><input type="checkbox" id="brandC" name="brand" value="Brand C"><label for="brandC"> Brand C</label></li>
+                   <!-- Brands should ideally be populated dynamically -->
+                </ul>
+            </div>
+           <button class="apply-filters-btn">Apply Filters</button>
+       </aside>
+
+        <!-- Product Grid -->
+        <section class="product-grid" id="product-grid">
+            <!-- Product cards will be loaded here by script.js -->
+            <!-- Example Structure (generated by JS):
+            <article class="product-card" data-id="a1b2c3d4e5f6">
+                 <div class="product-card-top">
+                     <button class="view-details-btn" data-product-id="a1b2c3d4e5f6" aria-label="View quick details for Laptop Pro X">
+                         <i class="fas fa-eye"></i>
+                     </button>
+                    <a href="product-detail.html?id=a1b2c3d4e5f6" class="product-card-link" aria-label="View full details for Laptop Pro X">
+                        <div class="product-card-image-wrapper">
+                             <img src="images/laptop.jpg" alt="Laptop Pro X shown from the front" loading="lazy">
+                        </div>
+                        <h3 id="product-name-a1b2c3d4e5f6">Laptop Pro X</h3>
+                        <div class="price-container">
+                             <span class="original-price">$1199.00</span>
+                             <span class="discounted-price">$1099.00</span>
+                             <span class="discount-badge">-$100.00</span>
+                        </div>
+                    </a>
+                </div>
+                <button type="button" class="add-to-cart-btn" aria-label="Add Laptop Pro X to cart" data-product-id="a1b2c3d4e5f6" data-product-name="Laptop%20Pro%20X" data-product-price="1099.00">
+                     <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+            </article>
+            -->
+            <p class="loading-message">Loading products...</p>
+        </section>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cart-sidebar" aria-hidden="true">
+        <div class="cart-header"><h2>Your Cart</h2><button class="close-cart-btn" id="close-cart-btn" aria-label="Close Cart"><i class="fas fa-times"></i></button></div>
+        <div class="cart-items" id="cart-items-list"><p class="cart-empty-msg">Your cart is currently empty.</p></div>
+        <div class="cart-footer"><p class="cart-total">Total: $<span id="cart-total-amount">0.00</span></p><button class="checkout-btn">Proceed to Checkout</button></div>
+    </aside>
+
+     <!-- Overlay (for sidebars) -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer Section -->
+     <footer class="site-footer">
+         <div class="container">
+            <p>© 2024 Your E-Commerce Store. All rights reserved.</p>
+            <p>
+                <a href="#">About Us</a> |
+                <a href="#">Contact</a> |
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a>
+            </p>
+         </div>
+     </footer>
+
+    <!-- Product Detail Modal (Quick View) -->
+    <div class="modal-overlay" id="modal-overlay" aria-hidden="true"></div>
+    <div class="product-modal" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-product-name" aria-hidden="true">
+        <button class="close-modal-btn" id="close-modal-btn" aria-label="Close product details">×</button>
+        <div class="modal-content">
+            <div class="modal-gallery">
+                <div class="modal-main-image"><img src="" alt="Main product image" id="modal-main-img" data-zoomable="false"></div>
+                <div class="modal-thumbnails" id="modal-thumbnails">
+                    <!-- Thumbnails loaded by JS -->
+                </div>
+            </div>
+            <div class="modal-details">
+                <h2 id="modal-product-name">Product Name</h2>
+                 <!-- Product ID Display -->
+                 <p class="modal-product-id">
+                    ID: <span id="modal-copy-id" class="copyable-id"></span>
+                    <button class="copy-id-btn" aria-label="Copy product ID" data-copy-text=""> <!-- data added for JS -->
+                         <i class="far fa-copy"></i>
+                    </button>
+                    <span class="copy-feedback" aria-live="polite"></span>
+                 </p>
+                <!-- MODAL PRICE CONTAINER - Structure updated -->
+                <div class="price-container modal-price-container">
+                    <!-- Populated by script.js -->
+                </div>
+                <p class="modal-description" id="modal-product-description">Product description...</p>
+                <button class="add-to-cart-btn modal-add-to-cart-btn" id="modal-add-to-cart-btn" type="button">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Container -->
+    <div class="zoom-overlay" id="zoom-overlay" aria-hidden="true">
+        <img src="" alt="Zoomed product image" id="zoomed-image">
+        <button class="close-zoom-btn" id="close-zoom-btn" aria-label="Close zoomed image">×</button>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="modal-overlay" id="auth-modal-overlay" aria-hidden="true"></div>
+    <div class="auth-modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" aria-hidden="true">
+        <button class="close-auth-modal-btn" id="close-auth-modal" aria-label="Close Login/Sign Up">×</button>
+        <div class="auth-modal-content">
+            <h2 id="auth-modal-title">Login or Sign Up</h2>
+             <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <h3>Login</h3>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                </div>
+                  <a href="#" class="forgot-password">Forgot Password?</a>
+                <button type="submit" class="auth-button">Login</button>
+                <p class="auth-switch">
+                    Need an account? <button type="button" class="auth-switch-link" id="show-signup">Sign Up</button>
+                </p>
+            </form>
+            <!-- Signup Form -->
+            <form id="signup-form" class="auth-form" style="display: none;">
+                <h3>Sign Up</h3>
+                <div class="form-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" name="name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" name="confirm_password" required autocomplete="new-password">
+                </div>
+                <button type="submit" class="auth-button">Create Account</button>
+                <p class="auth-switch">
+                    Already have an account? <button type="button" class="auth-switch-link" id="show-login">Login</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Script for Index Page (handles shared logic too) -->
+    <script src="script.js"></script>
+</body>
+</html>

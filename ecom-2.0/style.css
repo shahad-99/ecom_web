@@ -1,0 +1,1534 @@
+/* ==========================================================================
+   1. Variables & Basic Reset
+   ========================================================================== */
+
+   :root {
+    /* Color Palette */
+    --color-primary: #00695C;         /* Deep Teal/Green */
+    --color-primary-hover: #004D40;   /* Darker Teal/Green */
+    --color-accent: #DAA520;         /* Goldenrod */
+    --color-accent-hover: #B8860B;    /* Dark Goldenrod */
+    --color-secondary: #6c757d;       /* Medium Grey (for less important elements) */
+    --color-background: #f9f9f9;      /* Very Light Grey (body background) */
+    --color-surface: #ffffff;         /* White (cards, modals, sidebars) */
+    --color-border: #e0e0e0;          /* Light Grey Border */
+    --color-text-primary: #212529;    /* Dark Grey/Black (main text) */
+    --color-text-secondary: #555;     /* Lighter Grey (secondary text) */
+    --color-text-on-dark: #f8f9fa;    /* Light text for dark backgrounds (footer) */
+    --color-text-on-accent: #ffffff;  /* Text on golden buttons */
+    --color-text-on-primary: #ffffff; /* Text on teal buttons */
+    --color-danger: #D32F2F;          /* Muted Red */
+    --color-danger-hover: #B71C1C;   /* Darker Red */
+    --color-price: #2E7D32;           /* Darker Green for Price */
+    --color-overlay-dark: rgba(0, 0, 0, 0.75);
+    --color-overlay-medium: rgba(0, 0, 0, 0.6);
+
+    /* Color Palette (RGB for Opacity) */
+    --color-danger-rgb: 211, 47, 47; /* For pulse animation */
+    --color-primary-rgb: 0, 105, 92; /* For focus ring */
+
+    /* Typography */
+    --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-size-base: 1rem; /* ~16px */
+    --line-height-base: 1.6;
+
+    /* Layout & Spacing */
+    --container-max-width: 1200px;
+    --spacing-base: 1rem;
+    --spacing-small: calc(var(--spacing-base) * 0.5);
+    --spacing-medium: calc(var(--spacing-base) * 1.5);
+    --spacing-large: calc(var(--spacing-base) * 2);
+
+    /* Borders & Shadows */
+    --border-radius-base: 4px;
+    --border-radius-large: 8px;
+    --border-radius-pill: 50px;
+    --box-shadow-soft: 0 2px 5px rgba(0, 0, 0, 0.08);
+    --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --box-shadow-strong: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+    /* Transitions */
+    --transition-base: all 0.25s ease-in-out;
+    --transition-fast: all 0.2s ease;
+    --transition-sidebar: left 0.3s ease-in-out, right 0.3s ease-in-out, visibility 0s 0.3s; /* Updated */
+    --transition-modal: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s 0.3s;
+
+    /* Z-Indexes */
+    --z-index-overlay: 1040;
+    --z-index-sidebar: 1050;
+    --z-index-header: 1000;
+    --z-index-modal-overlay: 1090;
+    --z-index-modal: 1100;
+    --z-index-zoom-overlay: 1200;
+    --z-index-zoom-content: 1210;
+}
+
+/* Basic Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: var(--font-size-base); }
+body {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative; /* Needed for overlays potentially */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+body.no-scroll {
+    overflow: hidden;
+    /* Optional: Add padding-right to compensate for scrollbar width */
+    /* padding-right: calc(100vw - 100%); */
+}
+
+img, svg, video, canvas, audio, iframe, embed, object { max-width: 100%; height: auto; display: block; }
+a { color: var(--color-primary); text-decoration: none; transition: var(--transition-fast); }
+a:hover { color: var(--color-primary-hover); text-decoration: underline; } /* General link hover */
+button { cursor: pointer; font-family: inherit; border: none; background: none; padding: 0; }
+input, button, textarea, select { font: inherit; }
+ul, ol { list-style: none; } /* Removed default list styles */
+
+/* Utility Class */
+.container { width: 90%; max-width: var(--container-max-width); margin-left: auto; margin-right: auto; }
+
+/* User Select Reset */
+button,
+.utility-icon,
+.category-filter-item,
+.logo a,
+.cart-item-remove-btn,
+.close-btn,
+.close-nav-btn,
+.close-filters-btn,
+.close-cart-btn,
+.close-modal-btn,
+.close-zoom-btn,
+.close-auth-modal-btn,
+.mobile-nav-link,
+.filter-group label, /* Apply to labels too */
+.auth-switch-link,
+.apply-filters-btn,
+.clear-filters-btn,
+.checkout-btn,
+.add-to-cart-btn,
+.mobile-toggle,
+.copy-id-btn,
+.view-details-btn {
+    user-select: none; /* Standard */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+}
+
+/* Ensure text *is* selectable where needed */
+.modal-description,
+.modal-details h2,
+.product-card h3,
+.cart-item-details h4,
+.auth-modal-content h2,
+.auth-form h3,
+input, textarea, /* Input *fields* should be selectable */
+.product-grid p, /* Allow selection of loading/error messages */
+.site-footer p,
+.copyable-id, /* Allow selecting the ID */
+.description, /* Allow selecting detail page description */
+.price-container span { /* Allow selecting prices */
+    user-select: auto;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+}
+
+
+/* ==========================================================================
+   2. Header
+   ========================================================================== */
+
+.site-header {
+    background-color: var(--color-surface);
+    padding: var(--spacing-base) 0;
+    box-shadow: var(--box-shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-header);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-base);
+}
+
+/* Header Left: Logo & Mobile Toggle */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-base);
+    flex-shrink: 0;
+}
+.logo h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 1; /* Adjust line height */
+}
+.logo a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+.logo a:hover {
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+/* Header Center: Search */
+.search-container {
+    display: flex;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-pill);
+    overflow: hidden;
+    flex-grow: 1;
+    max-width: 550px;
+    margin: 0 var(--spacing-base);
+    background-color: var(--color-surface);
+    transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+.search-container:focus-within {
+     box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.25);
+     border-color: var(--color-primary);
+}
+
+.search-container input[type="search"] {
+    border: none;
+    padding: var(--spacing-small) var(--spacing-base);
+    font-size: 0.95rem;
+    outline: none;
+    flex-grow: 1;
+    background: transparent;
+    color: var(--color-text-primary);
+    min-width: 50px; /* Prevent excessive shrinking */
+}
+.search-container input[type="search"]::-webkit-search-decoration,
+.search-container input[type="search"]::-webkit-search-cancel-button,
+.search-container input[type="search"]::-webkit-search-results-button,
+.search-container input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none; /* Remove webkit search field icons */
+}
+.search-container input[type="search"]::placeholder {
+    color: var(--color-secondary);
+    opacity: 0.8;
+}
+.search-container input[type="search"]:disabled { /* Style for disabled search */
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+.search-button {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border: none;
+    padding: 0 var(--spacing-medium);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition-fast);
+    flex-shrink: 0;
+}
+.search-button:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/* Header Right: Utility Icons */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+    flex-shrink: 0;
+}
+
+.utility-icon {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: 1.3rem;
+    position: relative;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    padding: var(--spacing-small);
+    line-height: 1;
+}
+.utility-icon:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.utility-cart-icon {
+    font-size: 1.4rem;
+}
+.cart-count {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    background-color: var(--color-danger);
+    color: var(--color-surface);
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+/* Desktop Utility Nav */
+.utility-nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-base);
+}
+
+/* ==========================================================================
+   3. Mobile Navigation & Controls
+   ========================================================================== */
+
+/* Generic Mobile Toggle Button */
+.mobile-toggle {
+    display: none; /* Hidden by default, shown via @media */
+    font-size: 1.6rem;
+    color: var(--color-secondary);
+    padding: var(--spacing-small);
+    line-height: 1;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+.mobile-toggle:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+}
+.mobile-toggle:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Generic Close Button (for Sidebars/Modals) */
+.close-btn, /* Generic class if needed */
+.close-nav-btn,
+.close-filters-btn,
+.close-cart-btn,
+.close-modal-btn,
+.close-zoom-btn,
+.close-auth-modal-btn {
+    position: absolute;
+    top: var(--spacing-base);
+    right: var(--spacing-base);
+    font-size: 2rem;
+    color: var(--color-secondary);
+    line-height: 1;
+    padding: var(--spacing-small);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    z-index: 10; /* Above sidebar/modal content */
+    background: none; /* Ensure no background */
+    border: none; /* Ensure no border */
+    cursor: pointer;
+}
+/* Generic Hover - Color change only */
+.close-btn:hover,
+.close-nav-btn:hover,
+.close-filters-btn:hover,
+.close-cart-btn:hover,
+.close-modal-btn:hover,
+.close-zoom-btn:hover,
+.close-auth-modal-btn:hover {
+    color: var(--color-primary);
+}
+
+/* Specific adjustments & Hover Transforms */
+.close-modal-btn { font-size: 2.2rem; top: 12px; right: 12px; z-index: calc(var(--z-index-modal) + 10); }
+.close-modal-btn:hover { transform: scale(1.1) rotate(90deg); }
+
+.close-auth-modal-btn { top: 10px; right: 10px; }
+.close-auth-modal-btn:hover { transform: scale(1.1) rotate(90deg); }
+
+.close-zoom-btn {
+    font-size: 2.5rem; color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    z-index: var(--z-index-zoom-content);
+}
+.close-zoom-btn:hover { color: var(--color-surface); transform: scale(1.1) rotate(90deg); }
+
+/* Sidebar Close Buttons with TranslateY Centering */
+.close-cart-btn,
+.close-filters-btn {
+    top: 50%; /* Vertically center relative to parent header */
+    transform: translateY(-50%); /* Base centering */
+}
+.close-cart-btn:hover,
+.close-filters-btn:hover {
+     transform: translateY(-50%) scale(1.1) rotate(90deg); /* Add rotation on hover */
+}
+
+/* Mobile Nav Close Button Hover */
+.close-nav-btn:hover { transform: scale(1.1) rotate(90deg); }
+
+
+/* --- Mobile Nav Sidebar (Slide-in Menu) --- */
+.utility-nav-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    max-width: 85%;
+    height: 100%;
+    background-color: var(--color-surface);
+    box-shadow: var(--box-shadow-medium);
+    z-index: var(--z-index-sidebar);
+    padding: var(--spacing-large) var(--spacing-base) var(--spacing-base);
+    padding-top: 5rem;
+    transition: var(--transition-sidebar); /* Use variable */
+    overflow-y: auto;
+    visibility: hidden;
+}
+.utility-nav-mobile.visible {
+    left: 0;
+    visibility: visible;
+    transition: left 0.3s ease-in-out, visibility 0s 0s; /* Override transition for visibility */
+}
+/* ----------------------------------------- */
+
+/* General Mobile Nav Link/Button Style */
+.mobile-nav-link {
+    font-size: 1.1rem;
+    padding: var(--spacing-base) 0;
+    color: var(--color-text-primary);
+    width: 100%;
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-base);
+    text-align: left;
+    background: none;
+    border-radius: 0;
+}
+.mobile-nav-link:last-of-type {
+    border-bottom: none;
+}
+.mobile-nav-link:hover {
+    color: var(--color-primary);
+}
+.mobile-nav-link i {
+    width: 24px;
+    text-align: center;
+    color: var(--color-secondary);
+    transition: color var(--transition-fast);
+}
+.mobile-nav-link:hover i {
+    color: var(--color-primary);
+}
+
+
+/* Mobile Controls Bar (Below Header on Mobile) */
+.mobile-controls-bar {
+    display: none; /* Hidden by default, shown via @media */
+    padding: var(--spacing-small) 0;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+}
+.mobile-filter-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    font-size: 1rem;
+    padding: var(--spacing-small) var(--spacing-base);
+    color: var(--color-primary);
+    font-weight: 500;
+}
+.mobile-filter-toggle-btn:hover {
+    color: var(--color-primary-hover);
+}
+.mobile-filter-toggle-btn i {
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   4. Main Content Area & Filters
+   ========================================================================== */
+
+.main-content {
+    display: flex;
+    flex-wrap: nowrap; /* Default layout: filters beside grid */
+    padding: var(--spacing-large) 0;
+    flex-grow: 1;
+    gap: var(--spacing-large);
+}
+
+/* Filters Sidebar */
+.filters {
+    flex: 0 0 240px; /* Fixed width on desktop */
+    background-color: var(--color-surface);
+    padding: var(--spacing-medium) 0;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-soft);
+    height: fit-content; /* Height based on content */
+    border: 1px solid var(--color-border);
+    transition: var(--transition-sidebar); /* Use variable */
+}
+
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-medium);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 var(--spacing-medium) var(--spacing-base);
+    position: relative; /* For absolute positioning of close button */
+    height: 50px; /* Give header consistent height for close btn positioning */
+}
+.filters-header h2 {
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    color: var(--color-text-primary);
+}
+.close-filters-btn {
+    display: none; /* Hidden on desktop, shown via media query */
+    /* Positioned via top:50%, transform:translateY(-50%) in generic rules */
+}
+
+/* Filter Actions (Clear Button) */
+.filter-actions {
+    padding: 0 var(--spacing-medium);
+    margin-bottom: var(--spacing-medium);
+}
+.clear-filters-btn {
+    display: inline-block;
+    width: 100%;
+    padding: var(--spacing-small) var(--spacing-base);
+    background-color: transparent;
+    color: var(--color-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-base);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+.clear-filters-btn:hover:not(:disabled) {
+    background-color: rgba(0,0,0, 0.03);
+    color: var(--color-text-primary);
+    border-color: var(--color-secondary);
+}
+.clear-filters-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+.clear-filters-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    background-color: transparent !important;
+    border-color: var(--color-border) !important;
+    color: var(--color-secondary) !important;
+}
+
+/* Filter Groups */
+.filter-group { margin-bottom: var(--spacing-medium); }
+.filter-group h3 { margin-bottom: var(--spacing-base); font-size: 1.1rem; color: var(--color-text-primary); font-weight: 600; padding: 0 var(--spacing-medium); }
+.filter-group ul { padding: 0 var(--spacing-medium); }
+.filter-group li { margin-bottom: calc(var(--spacing-small) * 0.8); }
+
+/* Category Filter */
+.category-filter-item { color: var(--color-text-secondary); font-size: 0.95rem; cursor: pointer; padding: 4px 8px; display: block; border-radius: var(--border-radius-base); transition: color var(--transition-fast), background-color var(--transition-fast); width: 100%; }
+.category-filter-item:hover { color: var(--color-primary); background-color: rgba(var(--color-primary-rgb), 0.05); }
+.category-filter-item.active { font-weight: bold; color: var(--color-primary); background-color: rgba(var(--color-primary-rgb), 0.1); } /* Added active background */
+
+/* Price Filter */
+.filter-group label[for="min-price"], .filter-group label[for="max-price"] { display: block; font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-small); padding: 0 var(--spacing-medium); }
+.filter-group input[type="range"] { width: calc(100% - var(--spacing-medium) * 2); margin: 0 var(--spacing-medium) var(--spacing-base); accent-color: var(--color-primary); cursor: pointer; }
+
+/* Brand Filter */
+.filter-group #brand-filter-list li { display: flex; align-items: center; gap: calc(var(--spacing-small) * 0.8); margin-bottom: calc(var(--spacing-small) * 0.8); cursor: pointer; }
+.filter-group #brand-filter-list input[type="checkbox"] { accent-color: var(--color-primary); width: 1.1em; height: 1.1em; flex-shrink: 0; cursor: pointer; margin: 0; }
+.filter-group #brand-filter-list label { color: var(--color-text-secondary); font-size: 0.95rem; cursor: pointer; flex-grow: 1; display: inline; width: auto; padding: 0; gap: 0; line-height: 1.2; } /* Added line-height */
+.filter-group #brand-filter-list li:hover label { color: var(--color-primary); }
+
+/* Apply Filters Button */
+.apply-filters-btn {
+    display: none; /* Hidden on desktop, shown in mobile sidebar via media query */
+    width: calc(100% - var(--spacing-medium) * 2);
+    margin: var(--spacing-base) var(--spacing-medium) 0;
+    padding: var(--spacing-small) var(--spacing-base);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border-radius: var(--border-radius-base);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    text-align: center;
+    border: none;
+}
+.apply-filters-btn:hover { background-color: var(--color-primary-hover); }
+.apply-filters-btn:active { transform: scale(0.98); }
+.apply-filters-btn:disabled { background-color: var(--color-secondary); opacity: 0.7; cursor: not-allowed !important; }
+
+/* Disabled State for Filters */
+.filters [disabled], .filters [disabled] + label, .filters .category-filter-item.disabled { opacity: 0.5; cursor: not-allowed !important; pointer-events: none; background-color: transparent !important; color: var(--color-text-secondary) !important; }
+.category-filter-item.disabled:hover { background-color: transparent; }
+.category-filter-item.disabled.active { font-weight: normal; color: var(--color-text-secondary) !important; background-color: transparent !important;} /* Remove active styles when disabled */
+.filter-group #brand-filter-list li [disabled] + label { color: var(--color-text-secondary) !important; }
+.filter-group #brand-filter-list li:has([disabled]) { cursor: not-allowed !important; opacity: 0.5; }
+.filter-group #brand-filter-list li:has([disabled]):hover label { color: var(--color-text-secondary) !important; }
+
+
+/* ==========================================================================
+   5. Product Grid & Cards
+   ========================================================================== */
+
+.product-grid {
+    flex: 1; /* Takes remaining space */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-medium);
+    position: relative; /* For potential absolute positioned elements inside */
+    min-height: 300px; /* Ensure space while loading */
+    align-content: start; /* Align rows to start, prevents stretching */
+}
+
+/* Loading / No Products Messages */
+.product-grid .loading-message,
+.product-grid .no-products-message,
+.product-grid .error-message {
+    grid-column: 1 / -1; /* Span all columns */
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    padding: var(--spacing-large) var(--spacing-base);
+    align-self: center; /* Center vertically */
+    justify-self: center; /* Center horizontally */
+    width: 100%;
+}
+.product-grid .error-message {
+    color: var(--color-danger);
+    font-weight: 500;
+}
+
+/* Product Card */
+.product-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+    padding: var(--spacing-base);
+    box-shadow: var(--box-shadow-soft);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    display: flex; /* Use flex for vertical alignment */
+    flex-direction: column;
+    justify-content: space-between; /* Pushes button to bottom */
+    overflow: hidden; /* Clip hover effects if needed */
+    position: relative; /* For view details button */
+    width: 100%; /* Ensure it fills grid cell */
+}
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--box-shadow-medium);
+}
+
+/* Card Content Wrapper (Top part: Image, Title, Price) */
+.product-card-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    flex-grow: 1; /* Allow this section to grow */
+    margin-bottom: var(--spacing-base); /* Space before button */
+    text-align: center; /* Center align text */
+}
+
+/* View Details Button (Quick View) */
+.view-details-btn {
+    position: absolute;
+    top: var(--spacing-small);
+    right: var(--spacing-small);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    color: var(--color-secondary);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    transition: all var(--transition-fast);
+    z-index: 5; /* Above other card content */
+}
+.view-details-btn:hover {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    box-shadow: var(--box-shadow-soft);
+    transform: scale(1.1);
+}
+
+/* Product Link Area (Wraps Image, Title, Price) */
+.product-card-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none !important; /* Force no underline */
+    color: inherit; /* Inherit text color */
+    width: 100%;
+}
+.product-card-link:hover {
+    text-decoration: none !important; /* Force no underline on hover */
+}
+/* Title color change on link hover */
+.product-card-link:hover h3 {
+    color: var(--color-primary);
+    text-decoration: none !important;
+}
+
+/* Card Image */
+.product-card-image-wrapper {
+    width: 100%;
+    height: 180px; /* Fixed height for consistency */
+    margin-bottom: var(--spacing-base);
+    background-color: #fafafa; /* Placeholder background */
+    border-radius: var(--border-radius-base);
+    overflow: hidden;
+    display: flex; /* Center image inside */
+    align-items: center;
+    justify-content: center;
+}
+.product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Show whole image, may leave space */
+    transition: transform 0.3s ease;
+}
+.product-card:hover .product-card-link img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Card Title */
+.product-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: var(--spacing-small);
+    color: var(--color-text-primary);
+    min-height: 2.5em; /* Allow ~2 lines */
+    line-height: 1.25;
+    font-weight: 500;
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis (...) */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    text-align: center;
+    transition: color var(--transition-fast);
+    width: 100%; /* Ensure it takes full width for centering */
+}
+
+/* Price Container */
+.price-container {
+    display: flex;
+    align-items: baseline; /* Align text baselines */
+    justify-content: center; /* Center price elements */
+    gap: var(--spacing-small);
+    margin-bottom: var(--spacing-small);
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    min-height: 1.5em; /* Prevent jumpiness if discount appears/disappears */
+    width: 100%; /* Ensure it takes full width for centering */
+}
+.original-price {
+    font-size: 0.9em;
+    color: var(--color-text-secondary);
+    text-decoration: line-through;
+}
+.discounted-price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-price);
+}
+.discount-badge {
+    font-size: 0.75em;
+    font-weight: 600;
+    background-color: var(--color-danger);
+    color: var(--color-text-on-dark);
+    padding: 2px 6px;
+    border-radius: var(--border-radius-base);
+    margin-left: 2px; /* Small space before badge */
+}
+
+/* Add to Cart Button (General styles) */
+.add-to-cart-btn {
+    background-color: var(--color-accent);
+    color: var(--color-text-on-accent);
+    border-radius: var(--border-radius-base);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    display: inline-flex; /* Use inline-flex for icon alignment */
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-small);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* For potential ::before/::after effects */
+    z-index: 5; /* Ensure clickable over other elements */
+    padding: var(--spacing-small) var(--spacing-base);
+    border: none;
+    text-decoration: none; /* Ensure no underline if used as link */
+    line-height: 1.4; /* Consistent line height */
+}
+.add-to-cart-btn:hover {
+    background-color: var(--color-accent-hover);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+.add-to-cart-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.add-to-cart-btn:disabled {
+    background-color: var(--color-secondary);
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0.7;
+    cursor: not-allowed !important;
+    box-shadow: none;
+}
+.add-to-cart-btn i {
+    font-size: 1em; /* Icon size relative to button text */
+}
+
+/* Specific context for grid card button */
+.product-card .add-to-cart-btn {
+    align-self: center; /* Center button horizontally */
+    width: auto; /* Allow button to size based on content */
+    min-width: 150px; /* Minimum width */
+    max-width: 90%; /* Prevent excessive width */
+    margin-top: auto; /* Pushes button to bottom (due to flex column parent) */
+}
+
+
+/* ==========================================================================
+   6. Cart Sidebar
+   ========================================================================== */
+
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 360px;
+    max-width: 90%;
+    height: 100%;
+    background-color: var(--color-surface);
+    box-shadow: var(--box-shadow-medium);
+    z-index: var(--z-index-sidebar);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-sidebar); /* Use variable */
+    visibility: hidden;
+}
+.cart-sidebar.visible {
+    right: 0;
+    visibility: visible;
+    transition: right 0.3s ease-in-out, visibility 0s 0s; /* Override visibility transition */
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-base) var(--spacing-medium);
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background); /* Light background */
+    flex-shrink: 0; /* Prevent shrinking */
+    position: relative; /* For close button positioning */
+    height: 60px; /* Consistent header height */
+}
+.cart-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--color-text-primary);
+}
+/* Close button positioned via generic rules */
+
+.cart-items {
+    flex-grow: 1; /* Take available space */
+    overflow-y: auto; /* Enable scrolling */
+    padding: var(--spacing-base) var(--spacing-medium);
+}
+.cart-item {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between;
+    gap: var(--spacing-base);
+    padding: var(--spacing-base) 0;
+    border-bottom: 1px dotted var(--color-border);
+}
+.cart-item:last-child { border-bottom: none; }
+
+.cart-item-details {
+    flex-grow: 1; /* Allow details to take space */
+    word-break: break-word; /* Prevent long names overflowing */
+}
+.cart-item-details h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+}
+.cart-item-price {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.cart-item-remove-btn {
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+    padding: var(--spacing-small);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    line-height: 1;
+    flex-shrink: 0; /* Prevent button shrinking */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.cart-item-remove-btn:hover {
+    color: var(--color-danger);
+    transform: scale(1.15);
+}
+.cart-empty-msg {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-large);
+    font-style: italic;
+}
+
+.cart-footer {
+    padding: var(--spacing-base) var(--spacing-medium);
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-background); /* Light background */
+    text-align: right;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.cart-total {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-base);
+    color: var(--color-text-primary);
+}
+.cart-total span {
+    color: var(--color-price); /* Highlight total amount */
+}
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-base);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border-radius: var(--border-radius-base);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    text-align: center;
+    border: none;
+}
+.checkout-btn:hover {
+    background-color: var(--color-primary-hover);
+}
+.checkout-btn:active {
+    transform: scale(0.98);
+}
+.checkout-btn:disabled {
+    background-color: var(--color-secondary);
+    opacity: 0.7;
+    cursor: not-allowed !important;
+}
+
+
+/* ==========================================================================
+   7. Overlays
+   ========================================================================== */
+
+/* Sidebar Overlay (for Nav, Cart, Filters) */
+.overlay {
+    display: block;
+    position: fixed;
+    inset: 0; /* top, right, bottom, left = 0 */
+    background-color: var(--color-overlay-medium);
+    z-index: var(--z-index-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s; /* Transition opacity, hide visibility after */
+}
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s; /* Show visibility immediately */
+}
+
+/* Modal Overlays (for Product Quick View, Auth) */
+.modal-overlay,
+#auth-modal-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-overlay-dark); /* Darker for modals */
+    z-index: var(--z-index-modal-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+}
+.modal-overlay.visible,
+#auth-modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+/* Zoom Overlay */
+.zoom-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.88); /* Very dark for zoom */
+    z-index: var(--z-index-zoom-overlay);
+    cursor: zoom-out;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+    padding: 2%; /* Provide some padding around zoomed image */
+}
+.zoom-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+/* ==========================================================================
+   8. Product Modal (Quick View)
+   ========================================================================== */
+
+.product-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95); /* Start slightly smaller */
+    width: 90%;
+    max-width: 850px;
+    max-height: 90vh; /* Limit height */
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-strong);
+    z-index: var(--z-index-modal);
+    opacity: 0;
+    transition: var(--transition-modal); /* Use variable */
+    overflow: hidden; /* Prevent content spilling before scroll */
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+}
+.product-modal.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* Scale to full size */
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: row; /* Side-by-side on desktop */
+    padding: var(--spacing-large);
+    padding-top: 5rem; /* Ensure space for close button */
+    gap: var(--spacing-large);
+    flex-grow: 1; /* Allow content to fill modal height */
+    overflow-y: auto; /* Enable scrolling within content area */
+}
+
+/* Modal Gallery Styles */
+.modal-gallery { flex: 1 1 55%; display: flex; flex-direction: column; gap: var(--spacing-base); max-width: 55%; }
+.modal-main-image { border: 1px solid var(--color-border); border-radius: var(--border-radius-base); overflow: hidden; position: relative; background-color: var(--color-background); flex-shrink: 0; }
+.modal-main-image img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; transition: transform var(--transition-fast); }
+.modal-main-image img[data-zoomable="true"] { cursor: zoom-in; }
+.modal-main-image img[data-zoomable="true"]:hover { transform: scale(1.03); }
+.modal-thumbnails { display: flex; gap: var(--spacing-small); flex-wrap: wrap; justify-content: flex-start; }
+.modal-thumbnails img { width: 65px; height: 50px; object-fit: cover; border: 2px solid var(--color-border); border-radius: var(--border-radius-base); cursor: pointer; opacity: 0.7; transition: opacity var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast); }
+.modal-thumbnails img:hover { opacity: 1; transform: scale(1.08); border-color: var(--color-secondary); }
+.modal-thumbnails img.active-thumbnail { opacity: 1; border-color: var(--color-primary); transform: scale(1.05); box-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.5); }
+
+/* Modal Details Styles */
+.modal-details { flex: 1 1 45%; display: flex; flex-direction: column; }
+.modal-details h2 { margin-top: 0; margin-bottom: var(--spacing-small); font-size: 1.9rem; color: var(--color-text-primary); font-weight: 600; line-height: 1.3; }
+.modal-product-id, .detail-product-id { font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-medium); display: flex; align-items: center; gap: var(--spacing-small); font-family: 'Courier New', Courier, monospace; }
+.copyable-id { background-color: #eee; padding: 2px 6px; border-radius: var(--border-radius-base); user-select: all; cursor: text; }
+.copy-id-btn { color: var(--color-secondary); font-size: 1em; line-height: 1; transition: color var(--transition-fast), transform var(--transition-fast); }
+.copy-id-btn:hover { color: var(--color-primary); transform: scale(1.1); }
+.copy-id-btn .fa-check { color: var(--color-price); } /* Checkmark color */
+.copy-feedback { font-size: 0.9em; font-style: italic; color: var(--color-price); margin-left: var(--spacing-small); display: inline-block; min-height: 1em; min-width: 40px; text-align: left; }
+
+/* Modal Price Container - Inherits .price-container, adds specifics */
+.modal-price-container {
+    justify-content: flex-start; /* Align left */
+    margin-bottom: var(--spacing-medium);
+}
+.modal-price-container .discounted-price { font-size: 1.6rem; } /* Adjust size for modal */
+.modal-price-container .original-price { font-size: 1.1rem; } /* Adjust size */
+.modal-price-container .discount-badge { font-size: 0.8rem; } /* Adjust size */
+
+.modal-description { font-size: 1rem; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--spacing-large); flex-grow: 1; /* Take available space */ overflow-y: auto; max-height: 150px; /* Limit height */ }
+.modal-add-to-cart-btn { width: auto; padding: var(--spacing-base) var(--spacing-large); font-size: 1rem; align-self: flex-start; min-width: 180px; margin-top: auto; /* Push to bottom */ }
+
+/* ==========================================================================
+   9. Image Zoom
+   ========================================================================== */
+
+#zoomed-image {
+    display: block;
+    max-width: 96%;
+    max-height: 96%;
+    object-fit: contain;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    border-radius: var(--border-radius-base);
+}
+
+/* ==========================================================================
+   10. Footer
+   ========================================================================== */
+
+.site-footer {
+    background-color: #343a40; /* Dark background */
+    color: var(--color-text-on-dark); /* Light text */
+    text-align: center;
+    padding: var(--spacing-large) 0;
+    margin-top: auto; /* Push to bottom of viewport if content is short */
+    font-size: 0.9rem;
+}
+.site-footer .container { width: 90%; max-width: var(--container-max-width); margin: 0 auto; }
+.site-footer p { margin-bottom: var(--spacing-small); color: #adb5bd; /* Lighter grey for secondary text */ }
+.site-footer p:last-child { margin-bottom: 0; }
+.site-footer a { color: var(--color-surface); text-decoration: none; margin: 0 var(--spacing-small); font-weight: 500; transition: color var(--transition-fast); }
+.site-footer a:hover { color: var(--color-accent); text-decoration: underline; }
+
+/* ==========================================================================
+   11. Animations
+   ========================================================================== */
+
+@keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(var(--color-danger-rgb), 0.6); } 70% { transform: scale(1.15); box-shadow: 0 0 0 10px rgba(var(--color-danger-rgb), 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(var(--color-danger-rgb), 0); } }
+.utility-cart-icon.item-added-pulse > i { animation: pulse 0.6s ease-out; display: inline-block; /* Ensure animation works */ }
+
+
+/* ==========================================================================
+   12. Responsive Design
+   ========================================================================== */
+
+/* Medium Devices (Tablets, smaller desktops) */
+@media (max-width: 992px) {
+    .filters { flex-basis: 200px; } /* Narrower filter sidebar */
+    .product-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } /* Adjust grid minimum */
+    .search-container { max-width: 400px; } /* Shrink search bar */
+
+    /* Modal adjustments */
+    .modal-content { flex-direction: column; } /* Stack modal content */
+    .modal-gallery, .modal-details { max-width: 100%; flex-basis: auto; }
+
+    /* Detail Page Responsive (Stacking handled by rule above) */
+    .product-detail-container { flex-direction: column; gap: var(--spacing-medium); }
+    .product-detail-container .product-gallery,
+    .product-detail-container .product-info { max-width: 100%; flex-basis: auto; }
+    .product-detail-page .product-info h1 { font-size: 2rem; } /* Slightly smaller heading */
+}
+
+/* Small Devices (Landscape Phones, Tablets) */
+@media (max-width: 768px) {
+    /* Header adjustments */
+    .header-content { flex-wrap: nowrap; /* Prevent wrapping */ position: relative; gap: var(--spacing-small); }
+    .header-left { order: 1; }
+    .search-container { order: 2; flex-grow: 1; max-width: none; margin: 0 var(--spacing-small); }
+    .header-right { order: 3; gap: var(--spacing-small); }
+    .mobile-toggle { display: inline-block; } /* Show mobile toggles */
+    .utility-nav-desktop { display: none; } /* Hide desktop nav */
+    .mobile-controls-bar { display: flex; } /* Show mobile filter bar */
+
+    /* Main content stacking */
+    .main-content { flex-direction: column; padding-top: var(--spacing-base); }
+
+    /* Filters Mobile Sidebar */
+    .filters {
+        position: fixed; top: 0; left: -100%; /* Start off-screen */
+        width: 300px; max-width: 85%; height: 100%;
+        z-index: var(--z-index-sidebar);
+        border-radius: 0; box-shadow: var(--box-shadow-medium);
+        overflow-y: auto;
+        transition: var(--transition-sidebar); /* Use variable */
+        transform: none; /* Remove desktop transforms */
+        display: flex; flex-direction: column; /* Stack header/content */
+        border: none; flex-basis: auto; padding: 0; /* Reset flex/padding */
+        visibility: hidden; /* Start hidden */
+    }
+    .filters.visible {
+        left: 0; /* Slide in */
+        visibility: visible;
+        transition: left 0.3s ease-in-out, visibility 0s 0s; /* Override visibility transition */
+    }
+    .filters-header { position: sticky; top: 0; background: var(--color-surface); z-index: 1; padding: 0 var(--spacing-medium); /* Adjust padding */ height: 50px; /* Match desktop height */ display: flex; align-items: center; margin-bottom: 0;}
+    .close-filters-btn { display: block; font-size: 1.8rem; position: absolute; top: 50%; right: var(--spacing-medium); transform: translateY(-50%); } /* Ensure close button shows */
+    .filter-actions { padding-top: var(--spacing-base); padding-bottom: 0; margin-bottom: var(--spacing-medium); }
+    .filters > *:not(.filters-header):not(.apply-filters-btn) { padding-left: var(--spacing-medium); padding-right: var(--spacing-medium); } /* Add padding to filter groups etc */
+    .filter-group { padding: 0; /* Remove padding from group itself */ }
+    .filter-group h3,
+    .filter-group label[for="min-price"],
+    .filter-group label[for="max-price"],
+    .filter-group ul { padding: 0; /* Remove padding from children handled above */ }
+    .filter-group input[type="range"] { width: 100%; margin: 0 0 var(--spacing-base) 0; }
+    .filter-group:last-of-type { margin-bottom: calc(var(--spacing-large) + 70px); } /* Space for apply btn */
+    .apply-filters-btn {
+        display: block; /* Show apply button */
+        position: sticky; bottom: 0;
+        background-color: var(--color-surface);
+        padding: var(--spacing-base); margin: 0; width: 100%;
+        border-top: 1px solid var(--color-border);
+        border-radius: 0; z-index: 1;
+    }
+
+    /* Grid Mobile */
+    .product-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-base); }
+    .product-card { padding: var(--spacing-base); }
+    .product-card-image-wrapper { height: 150px; }
+    .product-card h3 { font-size: 0.95rem; min-height: 2.4em; }
+    .discounted-price { font-size: 1.1rem; }
+    .product-card .add-to-cart-btn { padding: var(--spacing-small) var(--spacing-base); font-size: 0.8rem; min-width: 120px; }
+
+    /* Cart Mobile */
+    .cart-sidebar { width: 300px; max-width: 85%; }
+
+    /* Modal Responsive (Already stacked from 992px) */
+    .modal-content { padding: var(--spacing-base); padding-top: 4.5rem; gap: var(--spacing-medium); }
+    .modal-details h2 { font-size: 1.6rem; }
+    .modal-price-container .discounted-price { font-size: 1.4rem; }
+    .modal-add-to-cart-btn { width: 100%; align-self: center; margin-top: var(--spacing-medium); }
+
+     /* Detail Page Responsive Small */
+     .product-detail-container {
+        padding: var(--spacing-medium); /* Adjust padding */
+        /* Stacking already handled */
+     }
+     /* FIX: Ensure gallery image is full width and above thumbnails */
+     .product-detail-container .product-gallery {
+         width: 100%; /* Take full width */
+         max-width: 100%; /* Override desktop max-width */
+     }
+     .product-detail-container .main-image-container {
+         width: 100%;
+     }
+     .product-detail-page .thumbnails-container {
+        justify-content: center; /* Center thumbnails below */
+     }
+     .product-detail-page .product-info h1 { font-size: 1.8rem; }
+     .product-detail-page .detail-price .discounted-price { font-size: 1.6rem; }
+     .product-detail-page .description { font-size: 0.95rem; max-height: none; } /* Remove max-height */
+     .slider-section h2 { font-size: 1.3rem; }
+
+     /* Horizontal Slider scrollbars */
+     .product-slider { padding-bottom: var(--spacing-base); scrollbar-width: thin; scrollbar-color: var(--color-secondary) var(--color-border); }
+     .product-slider::-webkit-scrollbar { height: 8px; }
+     .product-slider::-webkit-scrollbar-track { background: var(--color-border); border-radius: 4px;}
+     .product-slider::-webkit-scrollbar-thumb { background-color: var(--color-secondary); border-radius: 4px; border: 2px solid var(--color-border);}
+}
+
+/* Extra Small Devices (Portrait Phones) */
+@media (max-width: 480px) {
+     /* Header further adjustments */
+     .logo h1 { font-size: 1.4rem; }
+     .mobile-toggle { font-size: 1.4rem; padding: var(--spacing-small); }
+     .utility-icon { font-size: 1.2rem; padding: 2px; }
+     .header-right { gap: 2px; }
+     .cart-count { font-size: 0.65rem; padding: 1px 4px; top: 0; right: 0;}
+     .search-container input { font-size: 0.9rem; padding: var(--spacing-small); }
+     .search-button { padding: 0 var(--spacing-base); font-size: 0.9rem; }
+
+     /* Grid: 2 columns */
+     .product-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-small); }
+     .product-card { padding: var(--spacing-small); }
+     .product-card-image-wrapper { height: 120px; }
+     .product-card h3 { font-size: 0.9rem; min-height: 2.2em; -webkit-line-clamp: 2;}
+     .discounted-price { font-size: 1rem; }
+     .add-to-cart-btn { width: auto; min-width: 0; padding: var(--spacing-small) 10px; font-size: 0.75rem; gap: var(--spacing-small);}
+     .product-card .add-to-cart-btn i { font-size: 0.9em; }
+
+     .mobile-filter-toggle-btn { font-size: 0.9rem; gap: var(--spacing-small); padding: var(--spacing-small); }
+
+     /* Modals */
+     .modal-details h2 { font-size: 1.4rem; }
+     .modal-price-container .discounted-price { font-size: 1.2rem; }
+
+     /* Full width sidebars */
+     .filters, .utility-nav-mobile, .cart-sidebar { width: 100%; max-width: 100%; left: -100%; border-radius: 0; }
+     .filters.visible, .utility-nav-mobile.visible, .cart-sidebar.visible { left: 0; right: auto; }
+     .close-filters-btn, .close-cart-btn, .close-nav-btn { right: var(--spacing-base); }
+
+     /* Detail Page Responsive Extra Small */
+     .product-detail-container { padding: var(--spacing-base); } /* Reduce padding */
+     .product-detail-page .product-info h1 { font-size: 1.5rem; }
+     .product-detail-page .detail-price .discounted-price { font-size: 1.4rem; }
+     .product-detail-page .description { font-size: 0.9rem; }
+     .detail-add-to-cart-btn { width: 100%; font-size: 0.9rem; padding: var(--spacing-base); }
+     .slider-section h2 { font-size: 1.2rem; }
+     .product-slider .product-card { width: 140px; } /* Adjust slider card size */
+     .product-slider .product-card h3 { font-size: 0.85rem; }
+     .product-slider .discounted-price { font-size: 1rem; }
+}
+
+/* ==========================================================================
+   13. Authentication Modal & Forms
+   ========================================================================== */
+
+.auth-modal {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); width: 90%; max-width: 420px; max-height: 90vh; background-color: var(--color-surface); border-radius: var(--border-radius-large); box-shadow: var(--box-shadow-strong); z-index: var(--z-index-modal); opacity: 0; transition: var(--transition-modal); overflow: hidden; display: flex; flex-direction: column; visibility: hidden;
+}
+.auth-modal.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); visibility: visible; transition-delay: 0s; }
+.auth-modal-content { padding: var(--spacing-large); padding-top: 4rem; overflow-y: auto; flex-grow: 1; }
+.auth-modal-content h2 { text-align: center; margin-bottom: var(--spacing-medium); font-size: 1.5rem; color: var(--color-text-primary); }
+.auth-form { display: flex; flex-direction: column; gap: var(--spacing-base); }
+.auth-form h3 { text-align: center; margin-bottom: var(--spacing-small); font-size: 1.3rem; font-weight: 600; color: var(--color-text-primary); }
+.form-group { display: flex; flex-direction: column; gap: calc(var(--spacing-small) / 2); }
+.form-group label { font-size: 0.9rem; font-weight: 500; color: var(--color-text-secondary); }
+.form-group input[type="email"], .form-group input[type="password"], .form-group input[type="text"] { width: 100%; padding: var(--spacing-small) var(--spacing-base); border: 1px solid var(--color-border); border-radius: var(--border-radius-base); font-size: 1rem; transition: border-color var(--transition-fast), box-shadow var(--transition-fast); }
+.form-group input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.25); }
+.forgot-password { font-size: 0.85rem; text-align: right; margin-top: calc(var(--spacing-small) * -0.5); color: var(--color-secondary); }
+.forgot-password:hover { color: var(--color-primary); text-decoration: underline; }
+.auth-button { padding: calc(var(--spacing-base) * 0.75) var(--spacing-base); background-color: var(--color-primary); color: var(--color-text-on-primary); border-radius: var(--border-radius-base); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color var(--transition-fast), transform var(--transition-fast); text-align: center; border: none; margin-top: var(--spacing-small); }
+.auth-button:hover { background-color: var(--color-primary-hover); }
+.auth-button:active { transform: scale(0.98); }
+.auth-button:disabled { background-color: var(--color-secondary); opacity: 0.7; cursor: not-allowed !important; }
+.auth-switch { text-align: center; font-size: 0.9rem; color: var(--color-text-secondary); margin-top: var(--spacing-medium); }
+.auth-switch-link { color: var(--color-primary); font-weight: 600; background: none; border: none; padding: 0; cursor: pointer; text-decoration: underline; font-size: inherit; }
+.auth-switch-link:hover { color: var(--color-primary-hover); }
+/* Auth Trigger Buttons */
+.auth-trigger { background: none; border: none; padding: 0; margin: 0; color: inherit; cursor: pointer; font-family: inherit; }
+.utility-nav-desktop .auth-trigger { color: var(--color-secondary); font-size: 1.3rem; padding: var(--spacing-small); line-height: 1; }
+.utility-nav-desktop .auth-trigger:hover { color: var(--color-primary); transform: scale(1.1); }
+
+
+/* ==========================================================================
+   14. Product Detail Page Specific Styles
+   ========================================================================== */
+
+/* --- Ensure main content stacks vertically on detail page --- */
+.main-content.product-detail-page {
+    display: flex;
+    flex-direction: column; /* Force column layout */
+    flex-wrap: nowrap;
+}
+/* -------------------------------------------------------------- */
+
+.product-detail-page {
+   padding-bottom: var(--spacing-large);
+}
+
+#product-detail-content {
+   margin-bottom: var(--spacing-large);
+   min-height: 400px; /* Ensure space while loading */
+   position: relative;
+}
+
+#product-detail-content .loading-message,
+#product-detail-content .error-message {
+    padding: var(--spacing-large);
+    text-align: center;
+    color: var(--color-text-secondary);
+}
+#product-detail-content .error-message {
+    color: var(--color-danger);
+}
+
+.product-detail-container {
+    display: flex; /* Row layout for gallery/info on large screens */
+    gap: var(--spacing-large);
+    background-color: var(--color-surface);
+    padding: var(--spacing-large);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-soft);
+    border: 1px solid var(--color-border);
+}
+
+/* Detail Page Gallery */
+.product-detail-container .product-gallery {
+    flex: 1 1 55%;
+    max-width: 55%; /* Limit width on large screens */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-base);
+}
+.product-detail-container .main-image-container {
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-base);
+    overflow: hidden;
+    position: relative;
+    background-color: var(--color-background);
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.product-detail-container #detail-main-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+    object-fit: contain;
+    transition: transform var(--transition-fast);
+}
+.product-detail-container #detail-main-img[data-zoomable="true"] {
+    cursor: zoom-in;
+}
+.product-detail-container #detail-main-img[data-zoomable="true"]:hover {
+    transform: scale(1.03);
+}
+.product-detail-container .thumbnails-container {
+    display: flex;
+    gap: var(--spacing-small);
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align left on desktop */
+    margin-top: var(--spacing-base); /* Space below main image */
+}
+.product-detail-container .thumbnails-container img {
+    width: 75px;
+    height: 60px;
+    object-fit: cover;
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius-base);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.product-detail-container .thumbnails-container img:hover {
+    opacity: 1;
+    transform: scale(1.08);
+    border-color: var(--color-secondary);
+}
+.product-detail-container .thumbnails-container img.active-thumbnail {
+    opacity: 1;
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+    box-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.5);
+}
+
+/* Detail Page Info */
+.product-detail-container .product-info {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+}
+.product-detail-container .product-info h1 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-small);
+    font-size: 2.2rem;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    line-height: 1.3;
+}
+/* detail-product-id styles are shared (section 8) */
+.product-detail-page .detail-price {
+    margin-bottom: var(--spacing-medium);
+    justify-content: flex-start; /* Align left */
+    /* inherits .price-container styles */
+}
+.product-detail-page .detail-price .discounted-price {
+    font-size: 1.8rem;
+}
+.product-detail-page .description {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-large);
+    flex-grow: 1; /* Take available space */
+    overflow-y: auto; /* Allow scrolling if needed */
+    max-height: 300px; /* Optional height limit on desktop */
+}
+.product-detail-page .detail-add-to-cart-btn {
+    width: auto;
+    padding: var(--spacing-base) var(--spacing-large);
+    font-size: 1.1rem;
+    align-self: flex-start;
+    min-width: 200px;
+    margin-top: auto; /* Push to bottom */
+}
+
+/* ==========================================================================
+   15. Product Slider Styles
+   ========================================================================== */
+.product-sliders {
+    margin-top: var(--spacing-large);
+    width: 100%; /* Ensure sliders container takes full width */
+}
+.slider-section {
+    margin-bottom: var(--spacing-large);
+}
+.slider-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-medium);
+    padding-bottom: var(--spacing-small);
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+/* --- Horizontal Slider --- */
+.product-slider {
+    display: flex; /* Use flexbox */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    gap: var(--spacing-base);
+    padding: var(--spacing-small) 2px var(--spacing-base); /* Add padding bottom for scrollbar */
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on touch */
+    /* scroll-snap-type: x mandatory; */ /* Optional snapping */
+}
+/* Style scrollbars explicitly */
+ .product-slider {
+     scrollbar-width: thin; /* Firefox */
+     scrollbar-color: var(--color-secondary) var(--color-border); /* Firefox */
+ }
+ .product-slider::-webkit-scrollbar { height: 8px; }
+ .product-slider::-webkit-scrollbar-track { background: var(--color-border); border-radius: 4px;}
+ .product-slider::-webkit-scrollbar-thumb { background-color: var(--color-secondary); border-radius: 4px; border: 2px solid var(--color-border);}
+/* ----------------------- */
+
+.product-slider p { /* Loading/empty message */
+    color: var(--color-text-secondary);
+    padding: var(--spacing-medium) var(--spacing-base);
+    text-align: center;
+    width: 100%; /* Ensure message spans */
+    flex-shrink: 0; /* Prevent message shrinking */
+}
+
+/* Slider Card Styles (Based on .product-card but smaller) */
+.product-slider .product-card { /* Reuse .product-card but override sizes */
+    flex: 0 0 auto; /* Prevent shrinking/growing */
+    width: 200px; /* Fixed width for slider items */
+    min-height: auto; /* Allow natural height */
+    padding: var(--spacing-small);
+    /* scroll-snap-align: start; */ /* Optional snapping */
+}
+.product-slider .product-card-image-wrapper { height: 130px; margin-bottom: var(--spacing-small); } /* Adjust image height */
+.product-slider .product-card h3 { font-size: 0.9rem; min-height: 2.4em; -webkit-line-clamp: 2; margin-bottom: var(--spacing-small); }
+.product-slider .price-container { gap: 2px; margin-bottom: var(--spacing-small); min-height: 1.5em; }
+.product-slider .discounted-price { font-size: 1.1rem; }
+.product-slider .original-price { font-size: 0.8em; }
+.product-slider .discount-badge { font-size: 0.7em; padding: 1px 4px; }
+.product-slider .add-to-cart-btn {
+    font-size: 0.8rem;
+    padding: calc(var(--spacing-small) * 0.8) var(--spacing-base);
+    min-width: 0; /* Allow button to be smaller */
+    width: 100%; /* Full width within card padding */
+    margin-top: var(--spacing-small); /* Space above button */
+}
+.product-slider .view-details-btn { display: none; } /* Hide quick view icon in sliders */
+
+/* Recently Viewed Section Specifics (Optional) */
+.recently-viewed-section {
+    /* Add specific styles if needed, e.g., background */
+}

@@ -1,0 +1,453 @@
+[
+  {
+    "id": "a1b2c3d4e5f6",
+    "name": "Laptop Pro X",
+    "category": "electronics",
+    "price": 1199.00,
+    "discount": { "type": "fixed", "value": 100.00 },
+    "brand": "Brand A",
+    "description": "Experience blazing fast performance with the new Laptop Pro X. Featuring the latest generation processor, stunning Retina display, and all-day battery life. Perfect for professionals and creatives.",
+    "imageUrls": [
+      "images/laptop.jpg",
+      "images/laptop_right.jpg",
+      "images/laptop_top.jpg",
+      "images/laptop_key.jpg"
+    ],
+    "altText": "Laptop Pro X shown from the front",
+    "trending": false
+  },
+  {
+    "id": "f6e5d4c3b2a1",
+    "name": "Organic Cotton T-Shirt",
+    "category": "clothing",
+    "price": 29.99,
+    "discount": { "type": "percent", "value": 15 },
+    "brand": "Brand B",
+    "description": "Soft, breathable, and eco-friendly. This classic crew-neck t-shirt is made from 100% organic cotton for ultimate comfort and sustainability. Available in various colors.",
+    "imageUrls": [
+      "images/tshirt.jpg",
+      "https://via.placeholder.com/600x450/DBB/text=T-Shirt+Back",
+      "https://via.placeholder.com/600x450/DCC/text=T-Shirt+Fabric+Detail"
+    ],
+    "altText": "Organic Cotton T-Shirt in white",
+    "trending": false
+  },
+  {
+    "id": "1a2b3c4d5e6f",
+    "name": "Artisan Coffee Maker",
+    "category": "home goods",
+    "price": 85.50,
+    "discount": null,
+    "brand": "Brand C",
+    "description": "Brew the perfect cup every morning. This stylish coffee maker features a durable glass carafe, programmable timer, and a keep-warm function. Simple controls for delicious coffee.",
+    "imageUrls": [
+      "images/coffee.jpg",
+      "https://via.placeholder.com/600x450/CBB/text=Coffee+Maker+Top+View",
+      "https://via.placeholder.com/600x450/CCC/text=Coffee+Maker+Carafe"
+    ],
+    "altText": "Artisan Coffee Maker with glass carafe",
+    "trending": false
+  },
+  {
+    "id": "6f5e4d3c2b1a",
+    "name": "Trail Runner Shoes",
+    "category": "sports",
+    "price": 135.00,
+    "discount": { "type": "percent", "value": 10 },
+    "brand": "Brand A",
+    "description": "Conquer any terrain with these rugged trail running shoes. Designed for stability and grip, they feature a breathable mesh upper and cushioned midsole for comfort on long runs.",
+    "imageUrls": [
+      "images/shoe.jpg",
+      "https://via.placeholder.com/600x450/BBB/text=Running+Shoes+Top",
+      "https://via.placeholder.com/600x450/BCC/text=Running+Shoes+Sole"
+    ],
+    "altText": "Pair of Trail Runner Shoes",
+    "trending": false
+  },
+   {
+    "id": "e4d3c2b1a6f5",
+    "name": "Noise-Cancelling Headphones",
+    "category": "electronics",
+    "price": 199.95,
+     "discount": { "type": "fixed", "value": 20.00 },
+    "brand": "Brand B",
+    "description": "Immerse yourself in sound. These wireless headphones offer industry-leading noise cancellation, premium audio quality, and a comfortable over-ear design for extended listening.",
+    "imageUrls": [
+      "images/airpod.jpg",
+      "https://via.placeholder.com/600x450/ABA/text=Headphones+Side",
+      "https://via.placeholder.com/600x450/ACA/text=Headphones+Folded"
+    ],
+    "altText": "Black Noise-Cancelling Headphones",
+    "trending": false
+   },
+   {
+      "id": "c3b2a1f6e5d4",
+      "name": "Yoga Mat",
+      "category": "sports",
+      "price": 45.00,
+      "discount": null,
+      "brand": "Brand C",
+      "description": "Eco-friendly yoga mat with excellent grip and cushioning. Perfect for all types of yoga and floor exercises. Includes carrying strap.",
+      "imageUrls": [
+          "images/yoga_mat.jpg",
+          "https://via.placeholder.com/600x450/AFC/text=Yoga+Mat+Rolled"
+      ],
+      "altText": "Blue Yoga Mat unrolled",
+      "trending": false
+   },
+   {
+      "id": "b2a1f6e5d4c3",
+      "name": "Smart Watch SE",
+      "category": "electronics",
+      "price": 279.00,
+      "discount": { "type": "percent", "value": 5 },
+      "brand": "Brand A",
+      "description": "Stay connected, active, and healthy. Track your workouts, monitor your heart rate, and get notifications right on your wrist.",
+      "imageUrls": [
+          "images/smart_watch.jpg",
+          "https://via.placeholder.com/600x450/EAC/text=Smart+Watch+Side"
+      ],
+      "altText": "Smart Watch SE displaying time",
+      "trending": false
+   },
+   {
+    "id": "iphx00000001",
+    "name": "iPhone X",
+    "category": "electronics",
+    "price": 299.00,
+    "discount": { "type": "fixed", "value": 20.00 },
+    "brand": "Apple",
+    "description": "The phone that changed it all. Featuring an edge-to-edge OLED display, Face ID, and powerful A11 Bionic chip.",
+    "imageUrls": [
+      "images/iphone_x.jpg",
+      "https://via.placeholder.com/600x600/AAAAAA/FFFFFF?text=iPhone+X+Front",
+      "https://via.placeholder.com/600x600/AAAAAA/FFFFFF?text=iPhone+X+Back",
+      "https://via.placeholder.com/600x600/AAAAAA/FFFFFF?text=iPhone+X+Angle"
+    ],
+    "altText": "iPhone X in Silver",
+    "trending": false
+  },
+  {
+    "id": "iphxr0000001",
+    "name": "iPhone XR",
+    "category": "electronics",
+    "price": 349.00,
+    "discount": { "type": "percent", "value": 10 },
+    "brand": "Apple",
+    "description": "Brilliant Liquid Retina display, advanced Face ID, and the smart A12 Bionic chip. Available in vibrant colors.",
+    "imageUrls": [
+      "images/iphone_xr.jpg",
+      "https://via.placeholder.com/600x600/FF3B30/FFFFFF?text=iPhone+XR+Red",
+      "https://via.placeholder.com/600x600/007AFF/FFFFFF?text=iPhone+XR+Blue",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+XR+Back"
+    ],
+    "altText": "iPhone XR in Product Red",
+    "trending": false
+  },
+  {
+    "id": "iphxs0000001",
+    "name": "iPhone XS",
+    "category": "electronics",
+    "price": 399.00,
+    "discount": { "type": "fixed", "value": 25.00 },
+    "brand": "Apple",
+    "description": "Super Retina display, faster Face ID, and the smartest chip in a smartphone, the A12 Bionic. Dual-camera system.",
+    "imageUrls": [
+      "images/iphone_xs.jpg",
+      "https://via.placeholder.com/600x600/D4AF37/000000?text=iPhone+XS+Gold",
+      "https://via.placeholder.com/600x600/C0C0C0/000000?text=iPhone+XS+Silver",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+XS+Back"
+    ],
+    "altText": "iPhone XS in Gold",
+    "trending": false
+  },
+  {
+    "id": "iph110000001",
+    "name": "iPhone 11",
+    "category": "electronics",
+    "price": 449.00,
+    "discount": { "type": "percent", "value": 5 },
+    "brand": "Apple",
+    "description": "Dual-camera system with Ultra Wide. Night mode and stunning video quality. A13 Bionic chip for great performance.",
+    "imageUrls": [
+      "images/iphone_11.jpg",
+      "https://via.placeholder.com/600x600/A4DDED/000000?text=iPhone+11+Green",
+      "https://via.placeholder.com/600x600/FFF200/000000?text=iPhone+11+Yellow",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+11+Back"
+    ],
+    "altText": "iPhone 11 in Green",
+    "trending": false
+  },
+  {
+    "id": "iph11pro0001",
+    "name": "iPhone 11 Pro",
+    "category": "electronics",
+    "price": 549.00,
+    "discount": { "type": "fixed", "value": 30.00 },
+    "brand": "Apple",
+    "description": "Transformative triple-camera system. Unprecedented leap in battery life. A13 Bionic chip. Super Retina XDR display.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/587D71/FFFFFF?text=iPhone+11+Pro+Green",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+11+Pro+Grey",
+      "https://via.placeholder.com/600x600/C0C0C0/000000?text=iPhone+11+Pro+Back"
+    ],
+    "altText": "iPhone 11 Pro in Midnight Green",
+    "trending": false
+  },
+  {
+    "id": "iphse2gen001",
+    "name": "iPhone SE (2nd generation)",
+    "category": "electronics",
+    "price": 399.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "The powerful A13 Bionic chip in our most popular size. Portrait mode and 4K video. Touch ID for security.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/000000/FFFFFF?text=iPhone+SE+Black",
+      "https://via.placeholder.com/600x600/FFFFFF/000000?text=iPhone+SE+White",
+      "https://via.placeholder.com/600x600/FF3B30/FFFFFF?text=iPhone+SE+Red+Back"
+    ],
+    "altText": "iPhone SE (2nd generation) in Black",
+    "trending": false
+  },
+  {
+    "id": "iph12mini001",
+    "name": "iPhone 12 mini",
+    "category": "electronics",
+    "price": 499.00,
+    "discount": { "type": "percent", "value": 5 },
+    "brand": "Apple",
+    "description": "A14 Bionic chip, edge-to-edge OLED display, Ceramic Shield, and Night mode on every camera. Big news for mini.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/007AFF/FFFFFF?text=iPhone+12+mini+Blue",
+      "https://via.placeholder.com/600x600/A4DDED/000000?text=iPhone+12+mini+Green",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+12+mini+Back"
+    ],
+    "altText": "iPhone 12 mini in Blue",
+    "trending": false
+  },
+  {
+    "id": "iph120000001",
+    "name": "iPhone 12",
+    "category": "electronics",
+    "price": 599.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Blast past fast with 5G speed. A14 Bionic. Edge-to-edge OLED display. Ceramic Shield front.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/8F00FF/FFFFFF?text=iPhone+12+Purple",
+      "https://via.placeholder.com/600x600/FFFFFF/000000?text=iPhone+12+White",
+      "https://via.placeholder.com/600x600/000000/FFFFFF?text=iPhone+12+Back"
+    ],
+    "altText": "iPhone 12 in Purple",
+    "trending": false
+  },
+  {
+    "id": "iph12pro0001",
+    "name": "iPhone 12 Pro",
+    "category": "electronics",
+    "price": 749.00,
+    "discount": { "type": "fixed", "value": 50.00 },
+    "brand": "Apple",
+    "description": "Pro camera system takes low-light photography to the next level. Ceramic Shield. A14 Bionic chip. LiDAR Scanner.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/0077BE/FFFFFF?text=iPhone+12+Pro+Blue",
+      "https://via.placeholder.com/600x600/D4AF37/000000?text=iPhone+12+Pro+Gold",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+12+Pro+Back"
+    ],
+    "altText": "iPhone 12 Pro in Pacific Blue",
+    "trending": false
+  },
+  {
+    "id": "iph13mini001",
+    "name": "iPhone 13 mini",
+    "category": "electronics",
+    "price": 599.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Our most advanced dual-camera system ever. A huge leap in battery life. Durable design. Superfast A15 Bionic chip.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/FF69B4/FFFFFF?text=iPhone+13+mini+Pink",
+      "https://via.placeholder.com/600x600/000000/FFFFFF?text=iPhone+13+mini+Midnight",
+      "https://via.placeholder.com/600x600/007AFF/FFFFFF?text=iPhone+13+mini+Back"
+    ],
+    "altText": "iPhone 13 mini in Pink",
+    "trending": false
+  },
+  {
+    "id": "iph130000001",
+    "name": "iPhone 13",
+    "category": "electronics",
+    "price": 699.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Cinematic mode adds shallow depth of field automatically. Advanced dual-camera system. A15 Bionic chip.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/FFFFFF/000000?text=iPhone+13+Starlight",
+      "https://via.placeholder.com/600x600/4C586E/FFFFFF?text=iPhone+13+Blue",
+      "https://via.placeholder.com/600x600/FF3B30/FFFFFF?text=iPhone+13+Red+Back"
+    ],
+    "altText": "iPhone 13 in Starlight",
+    "trending": false
+  },
+  {
+    "id": "iph13pro0001",
+    "name": "iPhone 13 Pro",
+    "category": "electronics",
+    "price": 899.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Biggest upgrade to the Pro camera system ever. Super Retina XDR display with ProMotion. A15 Bionic chip.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/A0D2DB/000000?text=iPhone+13+Pro+Blue",
+      "https://via.placeholder.com/600x600/587D71/FFFFFF?text=iPhone+13+Pro+Green",
+      "https://via.placeholder.com/600x600/C0C0C0/000000?text=iPhone+13+Pro+Back"
+    ],
+    "altText": "iPhone 13 Pro in Sierra Blue",
+    "trending": false
+  },
+   {
+    "id": "iphse3gen001",
+    "name": "iPhone SE (3rd generation)",
+    "category": "electronics",
+    "price": 429.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Serious speed with the A15 Bionic chip and 5G. Big-time battery life and a superstar camera. Durable design and Touch ID.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/000000/FFFFFF?text=iPhone+SE+3+Midnight",
+      "https://via.placeholder.com/600x600/FFFFFF/000000?text=iPhone+SE+3+Starlight",
+      "https://via.placeholder.com/600x600/FF3B30/FFFFFF?text=iPhone+SE+3+Red+Back"
+    ],
+    "altText": "iPhone SE (3rd generation) in Midnight",
+    "trending": true
+  },
+  {
+    "id": "iph140000001",
+    "name": "iPhone 14",
+    "category": "electronics",
+    "price": 799.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Vital safety features like Crash Detection. Longer battery life. Even more impressive low-light photos. A15 Bionic chip.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/8F00FF/FFFFFF?text=iPhone+14+Purple",
+      "https://via.placeholder.com/600x600/4C586E/FFFFFF?text=iPhone+14+Blue",
+      "https://via.placeholder.com/600x600/000000/FFFFFF?text=iPhone+14+Back"
+    ],
+    "altText": "iPhone 14 in Purple",
+    "trending": true
+  },
+  {
+    "id": "iph14plus001",
+    "name": "iPhone 14 Plus",
+    "category": "electronics",
+    "price": 899.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "iPhone 14 features plus a larger 6.7-inch display and the best battery life ever in an iPhone.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/FFF200/000000?text=iPhone+14+Plus+Yellow",
+      "https://via.placeholder.com/600x600/FFFFFF/000000?text=iPhone+14+Plus+Starlight",
+      "https://via.placeholder.com/600x600/FF3B30/FFFFFF?text=iPhone+14+Plus+Back"
+    ],
+    "altText": "iPhone 14 Plus in Yellow",
+    "trending": true
+  },
+  {
+    "id": "iph14pro0001",
+    "name": "iPhone 14 Pro",
+    "category": "electronics",
+    "price": 999.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Dynamic Island, a magical new way to interact with iPhone. 48MP Main camera for up to 4x greater resolution. A16 Bionic chip.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/4B0082/FFFFFF?text=iPhone+14+Pro+Purple",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+14+Pro+Black",
+      "https://via.placeholder.com/600x600/D4AF37/000000?text=iPhone+14+Pro+Back"
+    ],
+    "altText": "iPhone 14 Pro in Deep Purple",
+    "trending": false
+  },
+  {
+    "id": "iph14prmax01",
+    "name": "iPhone 14 Pro Max",
+    "category": "electronics",
+    "price": 1099.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "All the features of iPhone 14 Pro with a larger 6.7-inch Super Retina XDR display and even longer battery life.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/C0C0C0/000000?text=iPhone+14+Pro+Max+Silver",
+      "https://via.placeholder.com/600x600/4B0082/FFFFFF?text=iPhone+14+Pro+Max+Purple",
+      "https://via.placeholder.com/600x600/333333/FFFFFF?text=iPhone+14+Pro+Max+Back"
+    ],
+    "altText": "iPhone 14 Pro Max in Silver",
+    "trending": false
+  },
+   {
+    "id": "iph150000001",
+    "name": "iPhone 15",
+    "category": "electronics",
+    "price": 799.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Dynamic Island comes to iPhone 15. New 48MP Main camera. Super-high-resolution photos. USB-C connector.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/FFC0CB/000000?text=iPhone+15+Pink",
+      "https://via.placeholder.com/600x600/90EE90/000000?text=iPhone+15+Green",
+      "https://via.placeholder.com/600x600/000000/FFFFFF?text=iPhone+15+Back"
+    ],
+    "altText": "iPhone 15 in Pink",
+    "trending": true
+  },
+  {
+    "id": "iph15plus001",
+    "name": "iPhone 15 Plus",
+    "category": "electronics",
+    "price": 899.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Dynamic Island, 48MP Main camera, and USB-C — all in a durable color-infused glass and aluminum design. Larger display.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/ADD8E6/000000?text=iPhone+15+Plus+Blue",
+      "https://via.placeholder.com/600x600/FFFACD/000000?text=iPhone+15+Plus+Yellow",
+      "https://via.placeholder.com/600x600/90EE90/000000?text=iPhone+15+Plus+Back"
+    ],
+    "altText": "iPhone 15 Plus in Blue",
+    "trending": true
+  },
+  {
+    "id": "iph15pro0001",
+    "name": "iPhone 15 Pro",
+    "category": "electronics",
+    "price": 999.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Forged in titanium. A17 Pro game-changing chip. Customizable Action button. Most powerful iPhone camera system.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/808080/FFFFFF?text=iPhone+15+Pro+Titanium",
+      "https://via.placeholder.com/600x600/000080/FFFFFF?text=iPhone+15+Pro+Blue",
+      "https://via.placeholder.com/600x600/F5F5DC/000000?text=iPhone+15+Pro+Back"
+    ],
+    "altText": "iPhone 15 Pro in Natural Titanium",
+    "trending": true
+  },
+  {
+    "id": "iph15prmax01",
+    "name": "iPhone 15 Pro Max",
+    "category": "electronics",
+    "price": 1199.00,
+    "discount": null,
+    "brand": "Apple",
+    "description": "Titanium design. A17 Pro chip. Action button. Pro camera system with the longest optical zoom in iPhone ever.",
+    "imageUrls": [
+      "https://via.placeholder.com/600x600/000000/FFFFFF?text=iPhone+15+Pro+Max+Black",
+      "https://via.placeholder.com/600x600/FFFFFF/000000?text=iPhone+15+Pro+Max+White",
+      "https://via.placeholder.com/600x600/808080/FFFFFF?text=iPhone+15+Pro+Max+Back"
+    ],
+    "altText": "iPhone 15 Pro Max in Black Titanium",
+    "trending": true
+  }
+]

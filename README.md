@@ -1,5 +1,5 @@
 # ecom_web
-
+```
 e-commerce-project/
 ├── index.html             # Main product grid page
 ├── product-detail.html    # Dedicated product detail page
@@ -18,4 +18,4 @@ e-commerce-project/
     ├── airpod.jpg
     ├── yoga_mat.jpg
     └── smart_watch.jpg
-    # Add other placeholder images if needed
+```
